@@ -1,0 +1,13 @@
+﻿@using objekty;
+@{
+    ViewData["Title"] = "Seznam kurtů";
+}
+<ul>
+@foreach (court cour in ViewBag.courts)
+{
+	<li>
+	<h2><a href="@Url.Action("Detail", new { id = cour.CourtID})">@cour.CourtID</a></h2>
+	<p>Otevírací doba: @cour.Opens:00 - @cour.Closes:00</p>
+	</li>
+}
+</ul>

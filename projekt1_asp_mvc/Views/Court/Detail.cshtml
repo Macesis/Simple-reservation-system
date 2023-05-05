@@ -1,0 +1,73 @@
+﻿@using objekty;
+@{
+	court cour = ViewBag.court;
+	ViewData["Title"] = cour.CourtID;
+
+	int start_hour = cour.Opens > DateTime.Now.Hour ? cour.Opens : DateTime.Now.Hour+1;
+
+	string now = "";
+
+	if (start_hour >= cour.Closes)
+	{
+		start_hour = cour.Opens;
+		now = DateTime.Now.AddDays(1).ToString("yyyy-MM-dd");
+	}
+	else
+	{
+		now = DateTime.Now.ToString("yyyy-MM-dd");
+	}
+	List<int> hours = Enumerable.Range(start_hour, cour.Closes - start_hour).ToList();
+	int sel_hour = hours[0];
+
+	if (!string.IsNullOrEmpty(ViewBag.ReserveError))
+	{
+		now = ViewBag.resStart.ToString("yyyy-MM-dd");
+		sel_hour = ViewBag.hours;
+	}
+}
+<h2>@cour.CourtID</h2>
+<p><b>Otevírací doba:</b> @cour.Opens:00 - @cour.Closes:00</p>
+<p><b>Cena:</b> @cour.Price Kč</p>
+<h3>Popis:</h3>
+<p>@cour.Description</p>
+
+<h3>Rezervace:</h3>
+<ul class="list-group"  style="max-height: 150px; overflow-y: scroll; max-width: 300px;">
+	@foreach(reservation res in ViewBag.reservations)
+	{
+		<p>@res.DateID - @res.DateID.AddHours(1).TimeOfDay</p>
+	}
+</ul>
+
+<h3>Rezervovat:</h3>
+<form method="post" action="/Court/Reserve" class="form-container" style="max-width: 500px;">
+	<input type="hidden" id="court_id" name="court_id" value="@cour.CourtID" placeholder="@cour.CourtID"/>
+	<label for="res_start">Datum</label>
+	<input type="date" class="form-control" id="res_start" name="res_start"
+		   value="@now" min="@now" />
+
+	<label for="hours">Hodina</label>
+	<select name="hours" class="form-control" id="hours">
+	@foreach (int hour in hours)
+		{
+			if (hour == sel_hour)
+			{
+				<option value="@hour" selected="selected">@hour:00</option>
+			}
+			else
+			{
+				<option value="@hour">@hour:00</option>
+			}
+		}
+	</select>
+	<div class="form-group mt-3 d-flex justify-content-start">
+		<button type="submit" class="btn btn-primary">Zarezervovat</button>
+	</div>
+
+	@if (!string.IsNullOrEmpty(ViewBag.ReserveError))
+	{
+		<div class="alert alert-danger" role="alert" style="margin-top: 20px;">
+			<p>@ViewBag.ReserveError</p>
+		</div>
+	}
+</form>

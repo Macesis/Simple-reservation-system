@@ -1,0 +1,36 @@
+﻿<Window x:Class="projekt_1.ReservationWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:projekt_1"
+        mc:Ignorable="d"
+        Title="Okno rezervace" Height="220" Width="300">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="10"/>
+        </Grid.ColumnDefinitions>
+        <Label Grid.Row="0" Grid.Column="0" Content="Kurt:"/>
+        <ComboBox Grid.Row="0" Grid.Column="1" x:Name="CourtComboBox" SelectedItem="{Binding Selected_Court}"/>
+        
+        <Label Grid.Row="1" Grid.Column="0" Content="Datum:"/>
+        <DatePicker Grid.Row="1" Grid.Column="1" x:Name="DatePicker" SelectedDate="{Binding Selected_Date}"/>
+
+        <Label Grid.Row="2" Grid.Column="0" Content="Čas:"/>
+        <ComboBox Grid.Row="2" Grid.Column="1" x:Name="TimeComboBox" SelectedItem="{Binding Selected_Time}"/>
+
+        <Label Grid.Row="3" Grid.Column="0" Content="Uživatel:"/>
+        <ComboBox Grid.Row="3" Grid.Column="1" x:Name="UserComboBox" SelectedItem="{Binding Selected_User}"/>
+
+        <Button Grid.Row="4" Grid.Column="1" x:Name="ReservationButton" Content="Rezervovat" Click="Button_Click" Margin="10"/>
+    </Grid>
+</Window>

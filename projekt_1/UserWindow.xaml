@@ -1,0 +1,41 @@
+﻿<Window x:Class="projekt_1.UserWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:projekt_1"
+        mc:Ignorable="d"
+        Title="Okno uživatele" Height="220" Width="300">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="10"/>
+        </Grid.ColumnDefinitions>
+
+        <Label Grid.Row="0" Grid.Column="0" Content="Uživatelské jméno:"/>
+        <TextBox Grid.Row="0" Grid.Column="1" Name="UserIDTextBox" Text="{Binding user_name}"/>
+
+        <Label Grid.Row="1" Grid.Column="0" Content="Heslo:"/>
+        <!--PasswordBox Grid.Row="1" Grid.Column="1" Name="PasswordBox" Password="{Binding Password}"/-->
+        <TextBox Grid.Row="1" Grid.Column="1" Name="PasswordTextBox"/>
+
+        <Label Grid.Row="2" Grid.Column="0" Content="Křestní jméno"/>
+        <TextBox Grid.Row="2" Grid.Column="1" Name="FirstNameTextBox"/>
+
+        <Label Grid.Row="3" Grid.Column="0" Content="Přijmení:"/>
+        <TextBox Grid.Row="3" Grid.Column="1" Name="LastNameTextBox"/>
+
+        <Label Grid.Row="4" Grid.Column="0" Content="Email:"/>
+        <TextBox Grid.Row="4" Grid.Column="1" Name="EmailTextBox"/>
+        <Button Grid.Row="5" Grid.Column="1" Content="Potvrdit" HorizontalAlignment="Stretch" Margin="10,10,10,10" VerticalAlignment="Stretch" Click="Button_Click"/>
+    </Grid>
+</Window>

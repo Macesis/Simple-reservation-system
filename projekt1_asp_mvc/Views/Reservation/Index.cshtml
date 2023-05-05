@@ -1,0 +1,34 @@
+﻿@using objekty;
+@{
+    ViewData["Title"] = "Moje rezervace";
+}
+<table class="table table-striped">
+    <thead class="thead-light">
+        <tr>
+            <th>Kurt</th>
+            <th>Datum</th>
+            <th>Hodina</th>
+            <th>Cena</th>
+            <th>Storno</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (reservation reservation in ViewBag.reservations)
+        {
+            <tr>
+                <td>@reservation.CourtID</td>
+                <td>@reservation.DateID.ToString("dd.MM.yyyy")</td>
+                <td>@reservation.DateID.ToString("HH:mm") - @reservation.DateID.AddHours(1).ToString("HH:mm")</td>
+                <td>@reservation.Price Kč</td>
+                @if (reservation.DateID > DateTime.Now)
+                {
+                    <td><a href="@Url.Action("Delete", new { cour = reservation.CourtID, dat = reservation.DateID})">Storno</a></td>
+                }
+                else
+                {
+                    <td></td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
